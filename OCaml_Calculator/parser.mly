@@ -1,12 +1,19 @@
 /* Parser file parser.mly */
 
-%token <int> INT            /* Integer number */
-%token PLUS MINUS           /* Plus Minus signs */
-%token EOL                  /* End of line */
-%left PLUS MINUS            /* Sequence of mathematical operations */
+%token <float> FLOAT        /* Float number         */
+%token PLUS MINUS MULT DIV  /* + - * / operators    */
+%token EOL                  /* End of line          */
+%token LBRACKET RBRACKET    /* Symbols: '(' and ')' */
+
+
+%left PLUS MINUS            /* Sequence of mathematical operations  */
+%left MULT DIV              /* * an / before plus and minus         */
+%nonassoc UMINUS            /* Unary minus                          */
+/* Unary minus has greater priority than PLUS.
+It means that (-x + y) is interpreted as ((-x) + y). */
 
 %start line                 /* Entry point */
-%type <int> line
+%type <float> line
 %%
 
 line:
@@ -14,7 +21,11 @@ line:
 ;
 
 expr:
-  |  INT                    { $1 }      /* Expr == num */
-  | expr PLUS expr          { $1 + $3 } /* num oper num */
-  | expr MINUS expr         { $1 - $3 } /* num oper num */
+  | FLOAT                   { $1 }        /* Expr == num it treats every num as float*/ 
+  | LBRACKET expr RBRACKET  { $2 }        /* '('expr')'  */
+  | expr PLUS expr          { $1 +. $3 }  /* num '+' num */
+  | expr MINUS expr         { $1 -. $3 }  /* num '-' num */
+  | expr MULT expr          { $1 *. $3 }  /* num '*' num */
+  | expr DIV expr           { $1 /. $3 }  /* num '/' num */
+  | MINUS expr %prec UMINUS { -. $2 }     /* '-'    expr */
 ;
