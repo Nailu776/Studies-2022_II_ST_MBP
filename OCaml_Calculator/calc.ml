@@ -66,6 +66,8 @@ while (!looping) do
       (* Unexpected token in lexer *)
       | UNEXPECTED_TOKEN ->
               print_endline ("Unexpected token error.\n")
+      | BuiltInFuncNotFound -> 
+              print_endline ("Built-in function not found.\n")
       (* Don't stop loop while debuging after unexpected (yet) error *)
       | _ -> print_endline ("Something is not right.\n")
 done;;
