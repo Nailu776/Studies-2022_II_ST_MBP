@@ -47,6 +47,14 @@ edycja pliku funs.ml:
 NOTE: w tym pliku dodajemy nowe funkcje widziane przez kalkulator.
 NOTE: mozna zrobic plik z jakas funkcjami pomocniczymi i go zalaczyc tutaj za pomoca open Nazwa_pliku;; (nazwa pliku z wielkiej litery)
 NOTE: jak bedziesz korzystal z pomocniczych plikow to je tez musisz dodac do Makefile by sie skompilowaly!!!
+
+
+BARDZO WAZNE!!!
+COMPILE: make
+TEST: ./calc
+CLEAN: make clean
+ZAWSZE CZYSC PRZED WYSLANIEM NA GITA!
+Wysylaj tylko nasze pliki, a nie generowane/wyniki kompilacji.
 *)
 
 
