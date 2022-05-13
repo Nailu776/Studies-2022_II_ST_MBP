@@ -103,3 +103,5 @@ rule token = parse
                             raise BuiltInFuncNotFound
                 }
   | _           { raise UNEXPECTED_TOKEN }
+  
+(* End of lexer.mll file *)

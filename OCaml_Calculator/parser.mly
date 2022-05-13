@@ -42,3 +42,5 @@ expr:
   /* Here you can add functions */
   | MY_3FUNC LBRACKET expr expr expr RBRACKET   { $1 $3 $4 $5 } /* TESTING sum3 */ 
 ;
+
+/* End of parser.mly file */

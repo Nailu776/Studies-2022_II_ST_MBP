@@ -26,3 +26,5 @@ calc: calc.ml
 # Clean project
 clean:
 	rm -f lexer.ml parser.ml parser.mli *.cmi *.cmo calc
+
+# End of Makefile file

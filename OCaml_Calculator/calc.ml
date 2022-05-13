@@ -71,3 +71,5 @@ while (!looping) do
       (* Don't stop loop while debuging after unexpected (yet) error *)
       | _ -> print_endline ("Something is not right.\n")
 done;;
+
+(* End of calc.ml file *)
