@@ -1,14 +1,18 @@
 # Makefile file
 
 # calc output file
-all:  parser lexer calc
-	ocamlc -o calc lexer.cmo parser.cmo calc.cmo
+all:  parser funs lexer calc
+	ocamlc -o calc funs.cmo lexer.cmo parser.cmo calc.cmo
 
 # Generates parser.ml and parser.ml
 # and compiles it
 parser: parser.mly
 	ocamlyacc parser.mly     
 	ocamlc -c parser.mli parser.ml
+
+# Compiles my functions
+funs: funs.ml
+	ocamlc -c funs.ml
 
 # Generates lexer.ml and compiles it
 lexer: lexer.mll
