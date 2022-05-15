@@ -1,0 +1,30 @@
+# Makefile file
+
+# draw output file
+all:  parser funs lexer draw
+	ocamlc -o draw funs.cmo lexer.cmo parser.cmo draw.cmo
+
+# Generates parser.ml and parser.ml
+# and compiles it
+parser: parser.mly
+	ocamlyacc parser.mly     
+	ocamlc -c parser.mli parser.ml
+
+# Compiles my functions
+funs: funs.ml
+	ocamlc -c funs.ml
+
+# Generates lexer.ml and compiles it
+lexer: lexer.mll
+	ocamllex lexer.mll       
+	ocamlc -c lexer.ml
+
+# Compile main program
+draw: draw.ml
+	ocamlc -c draw.ml
+
+# Clean project
+clean:
+	rm -f lexer.ml parser.ml parser.mli *.cmi *.cmo draw
+
+# End of Makefile file
