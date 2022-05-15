@@ -1,17 +1,22 @@
 (* File containing draw functions *)
-let range = 101;;
+let range = 41;;
 
 
-let space_char:string = "8" 
-let line_char:string = "*" 
-let polynomial_value poly x = List.fold_right (fun a s -> x * s + a) poly 0;;
-
+let space_char:string = "  " 
+let line_char:string = "()" 
+let x_axis_char:string = "=="
+let y_axis_char:string = "||"
+let polynomial_value poly = fun x -> (List.fold_left (fun s a -> x * s + a) 0 poly)/3;;
 
 let match_head h row_val poly= 
-    if row_val = polynomial_value poly h then
+    if row_val = (polynomial_value poly (h)) then
         [line_char]
+    else if row_val = 0 then
+        [x_axis_char]
     else
-        [space_char]
+        if h = 0 then [y_axis_char]
+        else [space_char]
+
 
 let rec build_row row_val x_range result poly =
     match x_range with
@@ -26,7 +31,7 @@ let rec build_canvas canv x_range y_range poly =
 let rec print_row row =
     match row with
         [] -> print_string "\n"
-        |h::[] -> print_string h
+        |h::[] -> print_string h; print_string "\n"
         |h::t -> print_string h; print_row t
 let rec print_canvas canv=
     match canv with
@@ -37,5 +42,5 @@ let rec print_canvas canv=
 let x_range = List.init range (fun x -> x - range/2);;
 let y_range = List.init range (fun y -> -y + range/2);;
 
-print_canvas (build_canvas [[]] x_range y_range [1;0]);;
+print_canvas (build_canvas [[]] x_range y_range [1;0;-51]);;
 
