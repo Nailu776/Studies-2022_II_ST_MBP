@@ -11,6 +11,8 @@
 
 /* TESTING FUNCTIONS */
 %token <float->float->float->float> MY_3FUNC /* My 3 args functions */
+%token <float -> float -> float -> float -> float -> float> POLY_DRAW
+%token <float -> float -> float -> float -> float -> float-> float> POLY_VAL
 
 /* Priority */
 %left PLUS MINUS            /* Sequence of mathematical operations  */
@@ -38,9 +40,10 @@ expr:
   | MINUS expr %prec UMINUS { -. $2 }     /* '-'    expr */
   | expr POW expr           { $1 ** $3 }  /* num '^' num */
   | BI_FUNC LBRACKET expr RBRACKET 
-                            { $1 $3 }     /* Built in functions with 1 arg */
+                            { $1 $3 }     /* Built in functions with S1 arg */
   /* Here you can add functions */
   | MY_3FUNC LBRACKET expr expr expr RBRACKET   { $1 $3 $4 $5 } /* TESTING sum3 */ 
-;
+  | POLY_DRAW expr expr expr expr expr {$1 $2 $3 $4 $5 $6 }
+  | POLY_VAL expr expr expr expr expr expr { $1 $2 $3 $4 $5 $6 $7 }
 
 /* End of parser.mly file */

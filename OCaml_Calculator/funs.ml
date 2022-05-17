@@ -61,5 +61,8 @@ Wysylaj tylko nasze pliki, a nie generowane/wyniki kompilacji.
 (* Example fun with 3 float arguments that sum x y z *)
 let sumuj3liczby (x:float) (y:float) (z:float) = 
   x +. y +. z;;
+open Poly;;
+let polydraw a b c d e = Poly.polydraw [int_of_float a; int_of_float b; int_of_float c; int_of_float d; int_of_float e];;
+let polyval a b c d e f = Poly.polyval [ int_of_float a; int_of_float b; int_of_float c; int_of_float d; int_of_float e] (int_of_float f);;
 
 (* End of funs.ml file *)

@@ -58,10 +58,15 @@
       giving numerically-accurate results even if x is close to 0.0. *)
   (* val funct_tab : (string, float -> float) Hashtbl.t = <abstr> *)
 
-  let my_three_args_funcs = create_my_hashtab 1 [
+  let my_three_args_funcs = create_my_hashtab 3 [
     ("sum3", sumuj3liczby);
   ];;
-
+  let poly_draw_func = create_my_hashtab 1 [
+    ("polydraw", polydraw);
+  ];;
+  let polyval_func = create_my_hashtab 1 [
+    ("polyval", polyval);
+  ];;
 } 
 
 (* Digits 0 1 2 3 4 5 6 7 8 9 *)
@@ -99,8 +104,16 @@ rule token = parse
                       try
                           let f = Hashtbl.find my_three_args_funcs word in
                           MY_3FUNC f
-                      with Not_found -> 
-                            raise BuiltInFuncNotFound
+                      with Not_found ->
+                          try
+                              let f = Hashtbl.find poly_draw_func word in
+                              POLY_DRAW f
+                          with Not_found ->
+                              try 
+                                  let f = Hashtbl.find polyval_func word in 
+                                  POLY_VAL f
+                              with Not_found ->
+                                  raise BuiltInFuncNotFound
                 }
   | _           { raise UNEXPECTED_TOKEN }
   
