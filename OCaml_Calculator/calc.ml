@@ -8,11 +8,34 @@ open Sys;;
 (* Welcome message *)
 print_char ('\n');
 print_string ("Hello! \n");;
-print_string ("Do you want to calculate something? \n");;
-print_string ("Let's start! \n");;
-print_string ("Enter your wish for calculation after \"~~\" symbol. \n");;
+print_string ("This is a scientific ocaml calculator \n");;
+print_string ("Enter your operation after \"~~\" symbol. \n");;
 print_string ("e.g. \n~~\t3 + 3 \n");;
-print_string ("Result:\t6 \n");;
+print_string ("Result:\t6 \n\n");;
+(*List of operations *)
+print_string ("Possible operations: \n");;
+print_string ("sqrt x \n");;
+print_string ("exp x \n");;
+print_string ("expm1 x \n");;
+print_string ("log x \n");;
+print_string ("log10 x \n");;
+print_string ("log1p x \n");;
+print_string ("cos x \n");;
+print_string ("sin x \n");;
+print_string ("tan x \n");;
+print_string ("acos x \n");;
+print_string ("asin x \n");;
+print_string ("atan x \n");;
+print_string ("cosh x \n");;
+print_string ("sinh x \n");;
+print_string ("tanh x \n");;
+print_string ("ceil x \n");;
+print_string ("floor x \n");;
+print_string ("abs_float x \n");;
+print_string ("polydraw a b c d e \n");;
+print_string ("polyval a b c d e x \n");;
+print_string ("\n"^"a-e - polynomial coefficients \n");;
+print_string ("x - argument \n\n");;
 (* print_string ("Please separate operations and numbers with whitespaces. \n");; *)
 print_string ("To terminate this program use Ctrl+C.\n\n");;
 
