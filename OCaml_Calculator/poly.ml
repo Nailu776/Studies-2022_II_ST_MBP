@@ -1,14 +1,18 @@
 (* File containing draw functions *)
-let range = 41;;
-let x_scale = 1;;
-let y_scale = 3;;
 
+let range = 41;;    (*Liczba pixeli na wyswietlaczu *)
+let x_scale = 1;;   (*Stosunek wartosc-pixel na osi x *)
+let y_scale = 3;;   (*Stosunek wartosc-pixel na osi x *)
+
+(*definicja znakow na wyswietlaczu *)
 let space_char:string = "  " 
 let line_char:string = "()" 
 let x_axis_char:string = "=="
 let y_axis_char:string = "||"
+(*funkcja obliczjaca wartosc dla podanego wielomianu oraz x *)
 let polynomial_value poly = fun x -> (List.fold_left (fun s a -> x * s + a) 0 poly);;
 
+(*funkcja decydujaca jaki znak nalezy wyrysowac *)
 let match_head h row_val poly= 
     if row_val = (polynomial_value poly (h/x_scale))/y_scale then
         [line_char]
@@ -18,46 +22,39 @@ let match_head h row_val poly=
         if h = 0 then [y_axis_char]
         else [space_char]
 
-
+(*funkcja zapelniajaca pojedynczy wiersz *)
 let rec build_row row_val x_range result poly =
     match x_range with
         h::[] -> result @ (match_head h row_val poly)
         |h::t -> build_row row_val t (result @ (match_head h row_val poly)) poly
-
+(*funkcja zapelniajaca cala matryce *)
 let rec build_canvas canv x_range y_range poly =
     match y_range with
         h::[] -> canv @ [(build_row h x_range [] poly)]
         |h::t -> build_canvas (canv @ [(build_row h x_range [] poly)]) x_range t  poly
-
+(*funkcja wypisujaca wiersz*)
 let rec print_row row =
     match row with
         [] -> print_string "\n"
         |h::[] -> print_string h; print_string "\n"
         |h::t -> print_string h; print_row t
+(*funkcja wypisujaca matryce *)
 let rec print_canvas canv=
     match canv with
         (h:'a list)::([]:'a list list) -> print_row h
         |(h:'a list)::t -> print_row h; print_canvas t;;
 
-
-
-
-
+(*dziedzina x *)
 let x_range = List.init range (fun x -> x - range/2);;
+(*zbior wartosci y *)
 let y_range = List.init range (fun y -> -y + range/2);;
 
-
+(*funkcja wyjsciowa wyrysowujaca wielomian*)
 let polydraw l = 
     print_canvas (build_canvas [[]] x_range y_range l);
-    print_string x_axis_char;
-    print_string " - ";
-    print_int x_scale;
-    print_string "\n";
-    print_string "\n";
-    print_string y_axis_char;
-    print_string " - ";
-    print_int y_scale;
-    print_string "\n";
+    print_string    (x_axis_char ^ " - " (string_of_int x_scale)
+                    ^ "\n\n" ^ y_axis_char ^ " - " ^ (string_of_int y_scale)
+                    ^ "\n");
     1.;;
-
+(*wyjciowa funkcja podajaca wartosc dla danego wielomianu i argumentu *)
 let polyval l v = float_of_int (polynomial_value l v);;
