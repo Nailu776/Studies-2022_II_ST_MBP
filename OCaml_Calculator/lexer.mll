@@ -72,7 +72,7 @@
 (* Digits 0 1 2 3 4 5 6 7 8 9 *)
 let digit = ['0'-'9']
 (* Float number *)
-let float = digit+('.'digit)?
+let float = digit+('.'digit+)?
 (* White spaces*)
 let white = [' ' '\t']+
 (* New line *)
