@@ -1,16 +1,16 @@
 # Makefile file
 
-# calc output file
+# Calc output file
 all:  parser  poly  funs  lexer  calc  
 	ocamlc -o calc poly.cmo funs.cmo lexer.cmo parser.cmo calc.cmo 
 
-# Generates parser.ml and parser.ml
+# Generates parser.mli and parser.ml
 # and compiles it
 parser: parser.mly
 	ocamlyacc parser.mly     
 	ocamlc -c parser.mli parser.ml
 
-#Polynomial module
+# Polynomial module
 poly: poly.ml
 	ocamlc -c poly.ml
 
@@ -30,4 +30,5 @@ calc: calc.ml
 # Clean project
 clean:
 	rm -f lexer.ml parser.ml parser.mli *.cmi *.cmo calc 
+	
 # End of Makefile file

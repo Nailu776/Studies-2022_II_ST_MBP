@@ -59,16 +59,17 @@ while (!looping) do
       | EndCalc -> 
               print_endline ("\n\tCtrl+C pressed. See you soon!");
               looping := false
-      (* Handle end of file *)
+      (* Handle end of file Ctrl+D *)
       | Lexer.Eof ->
-              print_endline ("End of file.");
+              print_endline ("\n\tEnd of file. See you soon!");
               looping := false
       (* Unexpected token in lexer *)
       | UNEXPECTED_TOKEN ->
               print_endline ("Unexpected token error.\n")
+      (* Built-int function not found *)
       | BuiltInFuncNotFound -> 
               print_endline ("Built-in function not found.\n")
-      (* Don't stop loop while debuging after unexpected (yet) error *)
+      (* Don't stop loop after unexpected (yet) error *)
       | _ -> print_endline ("Something is not right.\n")
 done;;
 
