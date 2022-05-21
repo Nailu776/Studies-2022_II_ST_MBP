@@ -12,6 +12,16 @@ let y_axis_char:string = "||"
 (*funkcja obliczjaca wartosc dla podanego wielomianu oraz x *)
 let polynomial_value poly = fun x -> (List.fold_left (fun s a -> x * s + a) 0 poly);;
 
+(*laczenie list z rekurencja ogonowa *)
+let append l1 l2 =
+  let rec loop acc l1 l2 =
+    match l1, l2 with
+    | [], [] -> List.rev acc
+    | [], h :: t -> loop (h :: acc) [] t
+    | h :: t, l -> loop (h :: acc) t l
+    in
+    loop [] l1 l2
+
 (*funkcja decydujaca jaki znak nalezy wyrysowac *)
 let match_head h row_val poly= 
     if row_val = (polynomial_value poly (h/x_scale))/y_scale then
@@ -26,14 +36,14 @@ let match_head h row_val poly=
 let rec build_row row_val x_range result poly =
     match x_range with
         [] -> ["Something went wrong"]
-        |h::[] -> result @ (match_head h row_val poly)
-        |h::t -> build_row row_val t (result @ (match_head h row_val poly)) poly
+        |h::[] -> append result (match_head h row_val poly)
+        |h::t -> build_row row_val t (append result (match_head h row_val poly)) poly
 (*funkcja zapelniajaca cala matryce *)
 let rec build_canvas canv x_range y_range poly =
     match y_range with
         [] -> [["Something went wrong"]]
-        |h::[] -> canv @ [(build_row h x_range [] poly)]
-        |h::t -> build_canvas (canv @ [(build_row h x_range [] poly)]) x_range t  poly
+        |h::[] -> append canv [(build_row h x_range [] poly)]
+        |h::t -> build_canvas (append canv [(build_row h x_range [] poly)]) x_range t  poly
 (*funkcja wypisujaca wiersz*)
 let rec print_row row =
     match row with
