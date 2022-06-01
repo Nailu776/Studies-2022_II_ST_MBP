@@ -35,13 +35,13 @@ let match_head h row_val poly=
 (*funkcja zapelniajaca pojedynczy wiersz *)
 let rec build_row row_val x_range result poly =
     match x_range with
-        [] -> ["Something went wrong"]
+        [] -> [" "]
         |h::[] -> append result (match_head h row_val poly)
         |h::t -> build_row row_val t (append result (match_head h row_val poly)) poly
 (*funkcja zapelniajaca cala matryce *)
 let rec build_canvas canv x_range y_range poly =
     match y_range with
-        [] -> [["Something went wrong"]]
+        [] -> [[" "]]
         |h::[] -> append canv [(build_row h x_range [] poly)]
         |h::t -> build_canvas (append canv [(build_row h x_range [] poly)]) x_range t  poly
 (*funkcja wypisujaca wiersz*)
@@ -53,7 +53,7 @@ let rec print_row row =
 (*funkcja wypisujaca matryce *)
 let rec print_canvas canv=
     match canv with
-        []-> print_string "Something went wrong"
+        []-> print_string "\n"
         |h::[[]] -> print_row h
         |h::t -> print_row h; print_canvas t
 
